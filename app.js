@@ -31,6 +31,12 @@ app.get('/', routeMiddleware.ensureLoggedIn, function(req,res){
   res.render('layout');
 });
 
+app.get('/search', routeMiddleware.ensureLoggedIn, function(req,res){
+  res.render('search');
+});
+
+
+
 app.get('/signup', routeMiddleware.preventLoginSignup ,function(req,res){
   res.render('users/signup');
 });
