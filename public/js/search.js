@@ -6,6 +6,28 @@ $(function() {
 //value for the input box
 	var value;
 
+    $("body").on("submit",".search-form", function(e){
+    
+    e.preventDefault();
+
+//displays the target form
+//gets the value of the hidden input within the 
+//form to ready it for ajax post
+   
+    var value = $(this).children("input").attr("value")
+
+    data = {crime: {name: value,vote:0}};
+
+$.ajax({
+  type: 'POST',
+  url: '/crimes',
+  data: data,
+  dataType: 'json'
+})
+
+
+});
+
 //when clicking on the input empties the list and empties the input
 	$( "#searchinput" ).focus(function(){
 
@@ -26,7 +48,6 @@ $(function() {
     	$('#search').click();
    		 $( "#searchinput" ).blur();
     },
-
 		});
 
 
@@ -57,14 +78,8 @@ $('#searchinput').keypress(function (e) {
 	})
 
 
-
-
-
-
 	function getResults(query)
 	{
-
-
 	$.ajax({
       type: 'GET',
       //updated URL for the JSON call
@@ -72,15 +87,21 @@ $('#searchinput').keypress(function (e) {
       dataType: 'json'
     }).done(function(data) {
       //loop through the data and append all the data to the DOM
-    
+
     	data.forEach(function(item){
 
+   
+   //maybe replace this with handlebars someday
     $('ul').append("<li >Crime: " + item.descript + "</li>")
    $('ul').append("<li >Time: " + item.time + "</li>")
    $('ul').append("<li >Date: " + item.date + "</li>")
    $('ul').append("<li>Long: " + item.location.longitude + "</li>")
    $('ul').append("<li >Lat: " + item.location.latitude + "</li>")
    $('ul').append("<li >Res: " + item.resolution + "</li>")
+  
+$('ul').append("<form id = 'test' class = 'search-form'><input type = 'hidden' id ='test' value='"+  item.descript + "'><input type='submit' value='Submit'></form>");
+
+
 
      })
 	})

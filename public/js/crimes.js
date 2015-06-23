@@ -1,9 +1,15 @@
 $(function() {
 
+var image = 'images/me.png';
+
 
 //clicking on the getcrimes button loads crimes function
 $('#data').on('click', function(e){
   loadCrimes();
+})
+
+$('#all').on('click', function(e){
+  loadAllCrimes()
 })
 
 //todo: add a view all crimes button to view all crimes
@@ -29,7 +35,7 @@ var data;
 
 //function for adding a marker with an additional 
 //name attribute to add to the info window
-    function addMarker(lat,lng,name) {
+    function addMarker(lat,lng,name,img) {
 
 //creates an infowindow for the app (tooltip popup box)
     	var infowindow = new google.maps.InfoWindow({
@@ -44,7 +50,8 @@ var data;
  	  var marker = new google.maps.Marker({
       position: myLatlng,
       map: map,
-      title: 'Hello World!'
+      title: 'Hello World!',
+      icon: img
   	});
   	//infowindow.open(map,marker);
     //adds the info window without opening it
@@ -100,7 +107,7 @@ function showPosition(position) {
     lng = position.coords.longitude;
 
 //todo add a url in the me marker to show my image/url
-    addMarker(lat,lng,"me")
+    addMarker(lat,lng,"me",image)
 }
 
 
@@ -177,6 +184,21 @@ $.ajax({
     })
   }
 
+  function loadAllCrimes() {
+    console.log("load all crimes")
+      $.ajax({
+      type: 'GET',
+      url: 'https://data.sfgov.org/resource/ritf-b9ki.json',
+      dataType: 'json'
+    }).done(function(data) {
+
+  // add markers to the map
+  data.forEach(function(item) {
+  addMarker(Number(item.location.latitude),Number(item.location.longitude),item.descript + " " + "resolution: " + item.resolution + " " + item.date)
+
+  })
+  })
+}
 //runs the main function 
 initialize();
 })
