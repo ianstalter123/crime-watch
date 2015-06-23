@@ -1,0 +1,41 @@
+<% include partials/headerlayout %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+  <script type="text/javascript" src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+  <link rel="stylesheet" href="/css/style.css">
+
+	<meta charset="UTF-8">
+	<title>Document</title>
+
+	 <style>
+      #map-canvas {
+        width: 500px;
+        height: 400px;
+        background-color: #CCC;
+        float:left;
+      }
+    </style>
+</head>
+<body>
+	<div id="map-canvas"></div>
+<a href = "/crimes">View my crime stash </a>
+<div style = "text-align:center" class="jumbotron">
+
+<p>Click the button to get your coordinates.</p>
+
+<button style = "display: inline-block;" id = "myloc">Get my loc</button>
+
+<button style = "display: inline-block;" id = "data">Get crimes</button>
+</div>
+
+
+
+<p id="demo"></p>
+
+<ul>
+</body>
+</html>

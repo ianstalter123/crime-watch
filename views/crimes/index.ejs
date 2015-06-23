@@ -1,0 +1,24 @@
+<h1>My crimes page</h1>
+
+<a href="/crimes/new">Add a new crime</a>
+
+<% crimes.forEach(function(crime){ %>
+  <p>
+    <a href="/crimes/<%= crime._id%>/"><%= crime.name%></a>
+  </p>
+ 
+  <p>
+    <a href="/crimes/<%= crime.id%>/edit">Edit</a>
+  </p>
+
+
+
+<% })%>
+
+ <p>
+    <a href="/logout">logout</a>
+  </p>
+  <p>
+    <a href="/">goto the crime map</a>
+  </p>
+

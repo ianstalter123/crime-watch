@@ -1,0 +1,11 @@
+<h1>Add a new crime</h1>
+<a href="/crimes">See all crimes</a>
+
+<form action="/crimes" method="POST">
+  <div class="form-group">
+    <label for="name">Crime: </label>
+    <input type="text" class="form-control" name="crime[name]" id="name" autofocus>
+  </div>
+  
+  <input type="submit" value="Add" class="btn btn-lg btn-success">
+</form>
