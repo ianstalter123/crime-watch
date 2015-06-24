@@ -37,7 +37,7 @@ $.ajax({
 
 //sets up the values for the autocomplete
 	$( "#searchinput" ).autocomplete({
-  	source: [ "arson", "assault", "fraud", "vandalism", "larceny/theft", "vehicle theft", "suspicious occ", "warrants" ],	
+  	source: [ "arson", "assault", "fraud", "vandalism", "larceny/theft", "vehicle theft", "suspicious occ", "warrants", "missing person","non-criminal","robbery","other offenses" ],	
   	messages: {
         noResults: '',
         results: function() {}
@@ -47,6 +47,7 @@ $.ajax({
     select: function(event, ui) { 
     	$('#search').click();
    		 $( "#searchinput" ).blur();
+       
     },
 		});
 
@@ -99,7 +100,7 @@ $('#searchinput').keypress(function (e) {
    $('ul').append("<li >Lat: " + item.location.latitude + "</li>")
    $('ul').append("<li >Res: " + item.resolution + "</li>")
   
-$('ul').append("<form id = 'test' class = 'search-form'><input type = 'hidden' id ='test' value='"+  item.descript + "'><input type='submit' value='Submit'></form>");
+$('ul').append("<form id = 'test' class = 'search-form'><input type = 'hidden' id ='test' value='"+  item.descript + "'><input type='submit' value='Add to crimes'></form>");
 
 
 

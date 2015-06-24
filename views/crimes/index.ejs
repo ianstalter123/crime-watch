@@ -2,8 +2,41 @@
   <meta charset="UTF-8">
   <title>Document</title>
 
+   <style>
+   html, body {
+    height: 100%;
+}
+
+html {
+    display: table;
+    margin: auto;
+}
+
+#canvas-holder {
+    margin-left:25px;
+  }
+
+body {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+ul {
+  list-style: none;
+ 
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+
+    </style>
+
 
   <script type="text/javascript" src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+  <script type="text/javascript" src="/js/chart.js"></script>
+   <script type="text/javascript" src="/js/main.js"></script>
+
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 
 </head>
@@ -15,31 +48,43 @@
 
 <h1>My crimes page</h1>
 
-<p>
-<a href="/search">Search for crimes</a>
-</p>
-<p>
-    <a href="/">Goto the crime map</a>
-  </p>
+<div class="nav">
+      <ul>
+        <li class="home"><a href="/search">Search for crimes</a></li>
+        <li class="tutorials"><a class="active" href="/">Goto crime map</a></li>
+       
+      </ul>
+    </div>
+
+
+
+<div id="canvas-holder">
+      <canvas id="chart-area" width="350" height="350"/>
+    </div>
 
 <% crimes.forEach(function(crime){ %>
-  <p>
+  <div style = "margin-top:20px">
+  <img style="width:50px; float:left;" src = "<%= crime.image%>">
     <a href="/crimes/<%= crime._id%>/"><%= crime.name%></a>
-  </p>
- 
-  <p>
     <a href="/crimes/<%= crime.id%>/edit">Edit</a>
-  </p>
+  </div>
+ 
+
+    
+ 
 
 
 
 <% })%>
 
- <p>
+
+ <p style = "margin-top:50px">
     <a href="/logout">logout</a>
   </p>
   </div>
   </div>
+
+ 
   </body>
   
 

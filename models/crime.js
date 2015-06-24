@@ -6,7 +6,8 @@ var crimeSchema = new mongoose.Schema({
   resolution: String,
   vote:String,
   lng: Number,
-  lat: Number
+  lat: Number,
+  image:String
 });
 
 var Crime = mongoose.model("Crime", crimeSchema);

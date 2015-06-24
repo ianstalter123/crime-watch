@@ -1,6 +1,10 @@
 $(function() {
 
+  getLocation();
+
 var image = 'images/me.png';
+var crimeImage = 'images/crime.png';
+var closeImage = 'images/close.png';
 
 
 //clicking on the getcrimes button loads crimes function
@@ -163,15 +167,15 @@ function loadCrimes()
     console.log("starting for loop")
 	data = {crime: {name: arr[i][1].descript,vote:0, resolution:arr[i][1].resolution}};
 
-$.ajax({
-  type: 'POST',
-  url: '/crimes',
-  data: data,
-  dataType: 'json'
-})
+// $.ajax({
+//   type: 'POST',
+//   url: '/crimes',
+//   data: data,
+//   dataType: 'json'
+// })
 
 //todo build this with handlebars!
-   		addMarker(Number(arr[i][1].location.latitude),Number(arr[i][1].location.longitude),arr[i][1].descript + " " + "resolution: " + arr[i][1].resolution)
+   		addMarker(Number(arr[i][1].location.latitude),Number(arr[i][1].location.longitude),arr[i][1].descript + " " + "resolution: " + arr[i][1].resolution,closeImage)
 	$('ul').append("<li class='list-group-item list-group-item-success'>" + i + "</li>")
 	$('ul').append("<li class='list-group-item list-group-item-success'>Distance from you: " + arr[i][0] + "</li>")
 	$('ul').append("<li class='list-group-item list-group-item-success'>Crime: " + arr[i][1].descript + "</li>")
@@ -192,9 +196,43 @@ $.ajax({
       dataType: 'json'
     }).done(function(data) {
 
-  // add markers to the map
+// add markers to the map
+//loops through the data and determines an
   data.forEach(function(item) {
-  addMarker(Number(item.location.latitude),Number(item.location.longitude),item.descript + " " + "resolution: " + item.resolution + " " + item.date)
+    console.log(item.category)
+    if(item.category == "ARSON")
+{
+crimeImage = 'images/arson.png'
+}
+else if(item.category == "LARCENY/THEFT")
+{
+crimeImage = 'images/theft.png'
+}
+else if(item.category == "ROBBERY")
+{
+crimeImage = 'images/theft.png'
+}
+else if(item.category == "BURGLARY")
+{
+crimeImage = 'images/theft.png'
+}
+else if(item.category == "VEHICLE THEFT")
+{
+crimeImage = 'images/vehicle.png'
+}
+else if(item.category == "ASSAULT")
+{
+crimeImage = 'images/assault.png'
+}
+else if(item.category == "VANDALISM")
+{
+crimeImage = 'images/vandalism.png'
+}
+else
+{
+crimeImage = 'images/crime.png'
+}
+  addMarker(Number(item.location.latitude),Number(item.location.longitude),item.descript + " " + "resolution: " + item.resolution + " " + item.date,crimeImage)
 
   })
   })
