@@ -104,9 +104,9 @@ app.get('/crimes/new', function(req,res){
 });
 
 app.get('/crimes/:id/', function(req,res){
-  db.Crime.findById(req.params.id, function(err,crime){
+   db.Crime.findById(req.params.id).populate("comments").exec(function(err,crime){
     res.render("crimes/show", {crime:crime});
-  });
+  })
 });
 
 app.get('/crimes/:id/edit', function(req,res){
@@ -125,6 +125,95 @@ app.delete('/crimes/:id', function(req,res){
   db.Crime.findByIdAndRemove(req.params.id, function(err,crime){
     res.redirect('/crimes');
   });
+});
+
+////
+/********* comments ROUTES *********/
+//for shallow routes we can restructure by 
+//removing the first (parent ID) sometimes
+
+// INDEX
+app.get('/crimes/:crime_id/comments', function(req,res){
+  db.Crime.findById(req.params.crime_id).populate('comments').exec(function(err,crime){
+    res.render("comments/index", {crime:crime});
+  });
+});
+
+// NEW
+app.get('/crimes/:crime_id/comments/new', function(req,res){
+  db.Crime.findById(req.params.crime_id,
+    function (err, crime) {
+      res.render("comments/new", {crime:crime});
+    });
+});
+
+// CREATE
+app.post('/crimes/:crime_id/comments', function(req,res){
+  db.Comment.create({name:req.body.comment}, function(err, comment){
+    console.log(comment)
+    if(err) {
+      console.log(err);
+      res.render("comments/new");
+    }
+    else {
+      db.Crime.findById(req.params.crime_id,function(err,crime){
+        crime.comments.push(comment);
+        comment.crime = crime._id;
+        comment.save();
+        crime.save();
+        res.redirect("/crimes/"+ req.params.crime_id +"/comments");
+      });
+    }
+  });
+});
+
+// SHOW
+app.get('/crimes/:crime_id/comments/:id', function(req,res){
+  //can you remove part of the route?
+  //can remove the first part becuz of parent/child relat
+  db.Comment.findById(req.params.id)
+    .populate('crime')
+    .exec(function(err,comment){
+      console.log(comment.crime)
+      res.render("comments/show", {comment:comment});
+    });
+});
+
+// EDIT
+//can you remove part of the route?
+app.get('/crimes/:crime_id/comments/:id/edit', function(req,res){
+  db.Comment.findById(req.params.id)
+    .populate('crime')
+    .exec(function(err,comment){
+      res.render("comments/edit", {comment:comment});
+    });
+});
+
+// UPDATE
+app.put('/crimes/:crime_id/comments/:id', function(req,res){
+ db.Comment.findByIdAndUpdate(req.params.id, {name:req.body.name},
+     function (err, comment) {
+       if(err) {  
+         res.render("comments/edit");
+       }
+       else {
+         res.redirect("/crimes/" + req.params.crime_id + "/comments");
+       }
+     });
+});
+
+// DESTROY
+app.delete('/crimes/:crime_id/comments/:id', function(req,res){
+ db.Comment.findByIdAndRemove(req.params.id, {name:req.body.name},
+      function (err, comment) {
+        if(err) {
+          console.log(err);
+          res.render("comments/edit");
+        }
+        else {
+          res.redirect("/crimes/" + req.params.crime_id + "/comments");
+        }
+      });
 });
 
 app.get("/logout", function (req, res) {

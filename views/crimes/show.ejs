@@ -1,6 +1,62 @@
-<h1><%= crime.name%></h1>
-<h1>Votes: <%= crime.vote%></h1>
-<h1>Resolution: <%= crime.resolution%></h1>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+
+   <style>
+   html, body {
+    height: 100%;
+}
+
+html {
+    display: table;
+    margin: auto;
+}
+
+#canvas-holder {
+    margin-left:25px;
+  }
+
+body {
+    display: table-cell;
+    text-align:center;
+    
+}
+
+ul {
+  list-style: none;
+ 
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+
+    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    </head>
+    <div class="panel panel-default">
+  <div class="panel-body">
+<h3><%= crime.name%></h3>
+<img style="width:150px;" src = "<%= crime.image%>">
+
+<h3>Votes: <%= crime.vote%></h3>
+<h3>Resolution: <%= crime.resolution%></h3>
+
+ <p>
+<h3>Tips:</h3>
+    <% crime.comments.forEach(function(comment){ %>
+      <p>
+       
+        <%=comment.name%></a>
+
+      </p>
+    <% })%>
+  </p>
+   <p>
+      <a href="/crimes/<%= crime._id%>/comments/new">Add a new comment</a>
+  </p>
+  <p>
 
 
 <a href="/crimes">See all crimes</a>
+</div>
+</div>

@@ -33,7 +33,7 @@ var markers = []
     var mapCanvas = document.getElementById('map-canvas');
     var mapOptions = {
       center: new google.maps.LatLng(37.7876973, -122.3973736),
-      zoom: 15,
+      zoom: 11,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     }
     map = new google.maps.Map(mapCanvas, mapOptions);

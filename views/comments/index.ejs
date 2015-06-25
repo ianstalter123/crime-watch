@@ -1,0 +1,28 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Comments</title>
+</head>
+<body>
+
+  <h3><%= crime.name%> </h3>
+  <h3>Comments about this crime:</h3>
+  <% crime.comments.forEach(function(comment){ %>
+    <p>
+      
+      <%= comment.name%>
+    </p>
+    
+  <% })%>
+  <a href="/crimes/<%= crime.id%>/comments/new">Add a new comment!</a>
+  <p>
+    
+  </p>
+  <p>
+    <a href="/crimes">See all crimes</a>
+  </p>
+</body>
+</html>
