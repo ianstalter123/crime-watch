@@ -1,5 +1,6 @@
 $(function() {
 
+
   getLocation();
 
 var image = 'images/me.png';
@@ -22,6 +23,7 @@ $('#all').on('click', function(e){
 //variables for the map and the data
 var map = 0;
 var data;
+var markers = []
 
 //verifies that the jquery is working
 	console.log('welcome to the crime map')
@@ -35,6 +37,75 @@ var data;
       mapTypeId: google.maps.MapTypeId.ROADMAP
     }
     map = new google.maps.Map(mapCanvas, mapOptions);
+
+
+  $.ajax({
+      type: 'GET',
+      url: 'https://data.sfgov.org/resource/ritf-b9ki.json',
+      dataType: 'json'
+    }).done(function(data) {
+
+// add markers to the map
+//loops through the data and determines an
+  data.forEach(function(item) {
+
+
+
+  var latLng = new google.maps.LatLng(item.location.latitude,
+      item.location.longitude);
+      if(item.category == "ARSON")
+{
+crimeImage = 'images/arson.png'
+}
+else if(item.category == "LARCENY/THEFT")
+{
+crimeImage = 'images/theft.png'
+}
+else if(item.category == "ROBBERY")
+{
+crimeImage = 'images/theft.png'
+}
+else if(item.category == "BURGLARY")
+{
+crimeImage = 'images/theft.png'
+}
+else if(item.category == "VEHICLE THEFT")
+{
+crimeImage = 'images/vehicle.png'
+}
+else if(item.category == "ASSAULT")
+{
+crimeImage = 'images/assault.png'
+}
+else if(item.category == "VANDALISM")
+{
+crimeImage = 'images/vandalism.png'
+}
+else
+{
+crimeImage = 'images/crime.png'
+}
+
+  var infowindow = new google.maps.InfoWindow({
+      content: item.descript
+  });
+
+  var marker = new google.maps.Marker({'position': latLng, icon: crimeImage});
+
+  
+
+    addInfoWindow(marker, item.descript);
+  markers.push(marker);
+
+
+  })
+  console.log(markers)
+  var mcOptions = {minimumClusterSize: 2};
+
+    var mc = new MarkerClusterer(map, markers, mcOptions);
+})
+
+
   }
 
 //function for adding a marker with an additional 
