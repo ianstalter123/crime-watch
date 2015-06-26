@@ -13,6 +13,21 @@ $('#data').on('click', function(e){
   loadCrimes();
 })
 
+$('#pan').on('click', function(e){
+  pan()
+})
+
+
+//todo store the latitude and long in each item and save in hidden form
+//so that i can zoom to it on the map
+
+function pan() {
+  console.log('panning')
+        var panPoint = new google.maps.LatLng(37.7868979973476,-122.388784430412);
+        map.setZoom(20);
+        map.panTo(panPoint)
+     }
+
 $('#all').on('click', function(e){
   loadAllCrimes()
 })
@@ -55,46 +70,47 @@ var markers = []
       item.location.longitude);
       if(item.category == "ARSON")
 {
-crimeImage = 'images/arson.png'
+crimeImage = '/images/arson.png'
 }
 else if(item.category == "LARCENY/THEFT")
 {
-crimeImage = 'images/theft.png'
+crimeImage = '/images/theft.png'
 }
 else if(item.category == "ROBBERY")
 {
-crimeImage = 'images/theft.png'
+crimeImage = '/images/theft.png'
 }
 else if(item.category == "BURGLARY")
 {
-crimeImage = 'images/theft.png'
+crimeImage = '/images/theft.png'
 }
 else if(item.category == "VEHICLE THEFT")
 {
-crimeImage = 'images/vehicle.png'
+crimeImage = '/images/vehicle.png'
 }
 else if(item.category == "ASSAULT")
 {
-crimeImage = 'images/assault.png'
+crimeImage = '/images/assault.png'
 }
 else if(item.category == "VANDALISM")
 {
-crimeImage = 'images/vandalism.png'
+crimeImage = '/images/vandalism.png'
 }
 else
 {
-crimeImage = 'images/crime.png'
+crimeImage = '/images/crime.png'
 }
 
   var infowindow = new google.maps.InfoWindow({
-      content: item.descript
+      content:  "<tr><td><img src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBfkk7LEfxwS6_DnBvQ_iP_dXE9PR5pHFuvnsVny2DJtZu3AImmwm9qeY' style='width:50px;'></td><td><a>" + item.descript + "</a></td><td><a href='/crimes/new?q="+item.descript+"'>Add</a></td></tr>"
+
   });
 
   var marker = new google.maps.Marker({'position': latLng, icon: crimeImage});
 
   
 
-    addInfoWindow(marker, item.descript);
+    addInfoWindow(marker,"<table><tr><td><img src ='" + crimeImage + "'  style='width:50px;'></td><td><a id ='pan'>" + item.descript + "</a></td></tr><tr><td></<td><a href='/crimes/new?q="+item.descript+"&i="+crimeImage+"'>Add</a></td></tr></table>");
   markers.push(marker);
 
 
@@ -233,7 +249,8 @@ function loadCrimes()
 	console.log("sorted the array")
   //console.log(arr)
 	//output the items on the ui
-	for(var i = 0; i < 10; i++)
+  $('.panel-body').append("<table style = 'text-align:center'>")
+	for(var i = 0; i < 5; i++)
 	{
     console.log("starting for loop")
 	data = {crime: {name: arr[i][1].descript,vote:0, resolution:arr[i][1].resolution}};
@@ -247,15 +264,19 @@ function loadCrimes()
 
 //todo build this with handlebars!
    		addMarker(Number(arr[i][1].location.latitude),Number(arr[i][1].location.longitude),arr[i][1].descript + " " + "resolution: " + arr[i][1].resolution,closeImage)
-	$('ul').append("<li class='list-group-item list-group-item-success'>" + i + "</li>")
-	$('ul').append("<li class='list-group-item list-group-item-success'>Distance from you: " + arr[i][0] + "</li>")
-	$('ul').append("<li class='list-group-item list-group-item-success'>Crime: " + arr[i][1].descript + "</li>")
-   $('ul').append("<li class='list-group-item list-group-item-success'>Time: " + arr[i][1].time + "</li>")
-   $('ul').append("<li class='list-group-item list-group-item-success'>Date: " + arr[i][1].date + "</li>")
-   $('ul').append("<li class='list-group-item list-group-item-success'>Long: " + arr[i][1].location.longitude + "</li>")
-   $('ul').append("<li class='list-group-item list-group-item-success'>Lat: " + arr[i][1].location.latitude + "</li>")
-   $('ul').append("<li class='list-group-item list-group-item-success'>Res: " + arr[i][1].resolution + "</li>")
+	// $('ul').append("<li class='list-group-item list-group-item-success'>" + i + "</li>")
+	// $('ul').append("<li class='list-group-item list-group-item-success'>Distance from you: " + arr[i][0] + "</li>")
+	// $('ul').append("<li class='list-group-item list-group-item-success'>Crime: " + arr[i][1].descript + "</li>")
+ //   $('ul').append("<li class='list-group-item list-group-item-success'>Time: " + arr[i][1].time + "</li>")
+ //   $('ul').append("<li class='list-group-item list-group-item-success'>Date: " + arr[i][1].date + "</li>")
+ //   $('ul').append("<li class='list-group-item list-group-item-success'>Long: " + arr[i][1].location.longitude + "</li>")
+ //   $('ul').append("<li class='list-group-item list-group-item-success'>Lat: " + arr[i][1].location.latitude + "</li>")
+ //   $('ul').append("<li class='list-group-item list-group-item-success'>Res: " + arr[i][1].resolution + "</li>")
+ $('.panel-body').append("<tr><td><img src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBfkk7LEfxwS6_DnBvQ_iP_dXE9PR5pHFuvnsVny2DJtZu3AImmwm9qeY' style='width:50px;'></td><td><a>" + arr[i][1].descript + "</a></td><td><a href='/crimes/new?q="+arr[i][1].descript+"'>Add</a></td></tr>")
       }
+      console.log(arr[i][1].location.longitude)
+      console.log(arr[i][1].location.latitude)
+      $('.panel-body').append("</table>")
     })
   }
 

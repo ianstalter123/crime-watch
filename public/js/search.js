@@ -14,9 +14,10 @@ $(function() {
 //gets the value of the hidden input within the 
 //form to ready it for ajax post
    
-    var value = $(this).children("input").attr("value")
+    var value = $(this).children("#test").attr("value")
+    var res = $(this).children("#test1").attr("value")
 
-    data = {crime: {name: value,vote:0}};
+    data = {crime: {name: value,vote:0,resolution:res}};
 
 $.ajax({
   type: 'POST',
@@ -100,7 +101,7 @@ $('#searchinput').keypress(function (e) {
    $('ul').append("<li >Lat: " + item.location.latitude + "</li>")
    $('ul').append("<li >Res: " + item.resolution + "</li>")
   
-$('ul').append("<form id = 'test' class = 'search-form'><input type = 'hidden' id ='test' value='"+  item.descript + "'><input type='submit' value='Add to crimes'></form>");
+$('ul').append("<form id = 'test' class = 'search-form'><input type = 'hidden' id ='test' value='"+  item.descript + "'><input type = 'hidden' id ='test1' value='"+  item.resolution + "'><input type='submit' value='Add to crimes'></form>");
 
 
 

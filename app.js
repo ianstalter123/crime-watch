@@ -27,8 +27,22 @@ app.use(session({
 
 app.use(loginMiddleware);
 
-app.get('/', routeMiddleware.ensureLoggedIn, function(req,res){
-  res.render('layout');
+app.get('/',routeMiddleware.ensureLoggedIn, function(req,res){
+  db.Crime.find({}, function(err,crimes){
+     res.format({
+       'text/html': function(){
+         res.render("layout", {crimes: crimes});
+       },
+
+       'application/json': function(){
+         res.send({ crimes: crimes });
+       },
+
+       'default': function(){
+         res.status(406).send('Not Acceptable');
+       }
+     })
+  });
 });
 
 app.get('/search', routeMiddleware.ensureLoggedIn, function(req,res){

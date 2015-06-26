@@ -3,30 +3,22 @@
   <title>Document</title>
 
    <style>
-   html, body {
-    height: 100%;
+  #main { 
+    width: 800px;
+    margin: 0 auto;
+}
+#sidebar    {
+    width: 300px;
+    height: 400px;
+    
+    float: left;
 }
 
-html {
-    display: table;
-    margin: auto;
-}
-
-#canvas-holder {
-    margin-left:25px;
-  }
-
-body {
-    display: table-cell;
-    vertical-align: middle;
-}
-
-ul {
-  list-style: none;
- 
-  text-align: center;
-  padding: 0;
-  margin: 0;
+#page-wrap  {
+    width: 400px;
+  
+    height: 400px;
+    margin-left: 300px;
 }
 
     </style>
@@ -42,8 +34,8 @@ ul {
 </head>
 
 <body>
-<div class="panel panel-default">
-  <div class="panel-body">
+
+
 
 
 <h1>SF Crime</h1>
@@ -52,37 +44,35 @@ ul {
       <ul>
         <li class="home"><a href="/search">Search for crimes</a></li>
         <li class="tutorials"><a class="active" href="/">Goto crime map</a></li>
-       
+        <li class="tutorials"><a class="active" href="/logout">Logout</a></li>
+   
       </ul>
     </div>
 
 
-
+<div id="main">
+  <div id="sidebar">
 <div id="canvas-holder">
       <canvas id="canvas" height="225" width="300"></canvas>
     </div>
 
+    </div>
+  <div id="page-wrap">
+
+<table class = "table">
 <% crimes.forEach(function(crime){ %>
-  <div style = "margin-top:20px">
-  <img style="width:50px; float:left;" src = "<%= crime.image%>">
-    <a href="/crimes/<%= crime._id%>/"><%= crime.name%></a>
-    <a href="/crimes/<%= crime.id%>/edit">Edit</a>
-  </div>
- 
-
-    
- 
-
-
-
+  <tr>
+    <td><img style="width:50px;" src = "<%= crime.image%>"></td>
+    <td><a href="/crimes/<%= crime._id%>/"><%= crime.name%></a></td>    
+    <td><a href="/crimes/<%= crime.id%>/edit">Edit</a></td>
+  </tr>
 <% })%>
+</table>
+</div>
+</div>
 
-
- <p style = "margin-top:50px">
-    <a href="/logout">logout</a>
-  </p>
-  </div>
-  </div>
+ 
+ 
 
  
   </body>

@@ -1,4 +1,16 @@
+<head>
+  <meta charset="UTF-8">
+  <title>New</title>
+
+
+  <script type="text/javascript" src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+
+</head>
+
+
 <h1>Edit your crime</h1>
+<a href="/crimes">See all crimes</a>
 
 
 <form action="/crimes/<%= crime.id %>?_method=PUT" method="POST">
@@ -13,7 +25,7 @@
   </div>
   
   
-  <input type="submit" value="Add" class="btn btn-lg btn-success">
+  <input type="submit" value="Update" class="btn btn-lg btn-success">
 </form>
 
 

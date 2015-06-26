@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="/css/style.css">
 
 	<meta charset="UTF-8">
-	<title>Document</title>
+	<title>San Francisco</title>
 
 	 <style>
       #map-canvas {
@@ -27,8 +27,19 @@
   <div class="panel-body">
 	<div id="map-canvas"></div>
   <div style = "text-align:center" id = "x">
-<a class="btn btn-default" href = "/crimes">Back home </a>
+
+<a class="btn btn-default" href = "/crimes">View list of crimes </a>
 <a class="btn btn-default" style = "display: inline-block;" id = "data">Get crimes nearby</a>
+
+<table style = "margin-top: 15px" >
+<% crimes.forEach(function(crime){ %>
+  <tr style = "text-align:left">
+    <td><img style="width:50px;padding:3px" src = "<%= crime.image%>"></td>
+    <td><a id = 'pan'><%= crime.name%></a></td>    
+    <td><a href="/crimes/<%= crime.id%>/edit">Edit</a></td>
+  </tr>
+<% })%>
+</table>
 </div>
 
 
@@ -44,7 +55,7 @@
 
 <p id="demo"></p>
 
-<ul>
+
 </div>
 </div>
 </body>
