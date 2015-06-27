@@ -56,10 +56,17 @@
       <canvas id="canvas" height="225" width="300"></canvas>
     </div>
 
+
     </div>
   <div id="page-wrap">
 
 <table class = "table">
+<tr>
+<td>resolved crimes: </td>
+<td ><a id = 'resolved'></a></td>
+<td>uresolved crimes: </td>
+<td ><a id = 'unresolved'></a></td>
+</tr>
 <% crimes.forEach(function(crime){ %>
   <tr>
     <td><img style="width:50px;" src = "<%= crime.image%>"></td>

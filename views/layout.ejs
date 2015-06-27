@@ -35,8 +35,8 @@
 <% crimes.forEach(function(crime){ %>
   <tr style = "text-align:left">
     <td><img style="width:50px;padding:3px" src = "<%= crime.image%>"></td>
-    <td><a id = 'pan'><%= crime.name%></a></td>    
-    <td><a href="/crimes/<%= crime.id%>/edit">Edit</a></td>
+    <td><a href="/crimes/<%= crime._id%>/"><%= crime.name%></a></td>    
+    <td><a href="/crimes/<%= crime.id%>/edit">Edit</a><a id = "pan"> Focus</a></td>
   </tr>
 <% })%>
 </table>

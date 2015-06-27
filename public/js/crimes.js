@@ -110,7 +110,7 @@ crimeImage = '/images/crime.png'
 
   
 
-    addInfoWindow(marker,"<table><tr><td><img src ='" + crimeImage + "'  style='width:50px;'></td><td><a id ='pan'>" + item.descript + "</a></td></tr><tr><td></<td><a href='/crimes/new?q="+item.descript+"&i="+crimeImage+"'>Add</a></td></tr></table>");
+    addInfoWindow(marker,"<table><tr><td><img src ='" + crimeImage + "'  style='width:50px;'></td><td><a id ='pan'>" + item.descript + "</a></td></tr><tr><td></td><td><a>Date:  "+item.date+"</a></td></tr><tr><td></td><td><a>Resolution:  "+item.resolution+"</a></td></tr><tr><td></td><td><a class='btn btn-default' href='/crimes/new?q="+item.descript+"&i="+crimeImage+"'>Add to my collection</a></td></tr></tr></table>");
   markers.push(marker);
 
 

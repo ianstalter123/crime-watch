@@ -1,5 +1,6 @@
 $(function() {
-
+var unresolved = 0;
+var resolved = 0;
 
 
 // var arson = 0
@@ -7,7 +8,7 @@ $(function() {
 // var assault = 0
 // var vandalism = 0
 // var theft = 0
-//var pieData = []
+var pieData = [0,0]
 
 
 
@@ -19,52 +20,70 @@ $(function() {
       dataType: 'json'
     }).done(function(data) {
 
+
 console.log('ran ajax')
 // add markers to the map
 //loops through the data and determines an
   data.forEach(function(item) {
     //console.log(item.category)
     console.log('counting items')
-    if(item.category == "ARSON")
-{
+ if(item.resolution == "NONE")
+ {
+ 	pieData[0] += 1;
+ 	//console.log(unresolved)
+ }
+ else if (item.resolution != "NONE")
+ {
+ 	pieData[1] += 1;
+ 	//console.log(resolved)
+ }
+//     if(item.category == "ARSON")
+// {
 
-pieData[0].value +=1
+// pieData[0].value +=1
 
-}
-    else if(item.category == "FRAUD")
-{
-pieData[1].value +=1
+// }
+//     else if(item.category == "FRAUD")
+// {
+// pieData[1].value +=1
 
-}
-else if(item.category == "LARCENY/THEFT")
-{
+// }
+// else if(item.category == "LARCENY/THEFT")
+// {
 
-pieData[4].value +=1
-}
-else if(item.category == "ROBBERY")
-{
-pieData[4].value +=1
-}
-else if(item.category == "BURGLARY")
-{
-pieData[4].value +=1
-}
-else if(item.category == "VEHICLE THEFT")
-{
-pieData[4].value +=1
-}
-else if(item.category == "ASSAULT")
-{
-pieData[2].value +=1
-}
-else if(item.category == "VANDALISM")
-{
-pieData[3].value +=1
-}
+// pieData[4].value +=1
+// }
+// else if(item.category == "ROBBERY")
+// {
+// pieData[4].value +=1
+// }
+// else if(item.category == "BURGLARY")
+// {
+// pieData[4].value +=1
+// }
+// else if(item.category == "VEHICLE THEFT")
+// {
+// pieData[4].value +=1
+// }
+// else if(item.category == "ASSAULT")
+// {
+// pieData[2].value +=1
+// }
+// else if(item.category == "VANDALISM")
+// {
+// pieData[3].value +=1
+// }
 
 
   })
+  //console.log("resolved " + resolved)
+  //console.log("unresolved " + unresolved)
+
+  $('#resolved').html(pieData[0])
+		$('#unresolved').html(pieData[1])
+console.log(pieData[0])
   })
+    
 }
 	
 
@@ -89,6 +108,9 @@ pieData[3].value +=1
 		window.myBar = new Chart(ctx).Bar(barChartData, {
 			responsive : true
 		});
+		console.log("unresolved " + pieData[0])
+		console.log("resolved " + pieData[1])
+		
 	}
 
 // var pieData = [
@@ -130,5 +152,8 @@ pieData[3].value +=1
 // 				var ctx = document.getElementById("chart-area").getContext("2d");
 // 				window.myPie = new Chart(ctx).Pie(pieData);
 // 			};
+loadAllCrimes()
+console.log("resolved" +  resolved)
+console.log("unresolved" + unresolved)
 
 	});
