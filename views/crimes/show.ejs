@@ -1,41 +1,52 @@
+<html>
+
 <head>
-  <meta charset="UTF-8">
-  <title>Document</title>
-
-   <style>
-   html, body {
-    height: 100%;
+<style>
+.container-fluid  {
+    width: 1140px;
 }
-
-html {
-    display: table;
-    margin: auto;
-}
-
-#canvas-holder {
-    margin-left:25px;
-  }
-
-body {
-    display: table-cell;
-    text-align:center;
-    
-}
-
-ul {
-  list-style: none;
- 
-  text-align: center;
-  padding: 0;
-  margin: 0;
-}
-
-    </style>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+</style>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     </head>
-    <div class="panel panel-default">
-  <div class="panel-body">
-<h3><%= crime.name%></h3>
+  <body>
+    <div class="container-fluid">   
+       <div class="navbar">
+        <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">About</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/crimes">Main Page <span class="sr-only">(current)</span></a></li>
+        <li ><a href="/">Back to map <span ></span></a></li>
+     
+      <ul class="nav navbar-nav navbar-right">
+        <li><a id = "data" href="#">Show crimes nearby</a></li>
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a id = "data" href="/crimes/<%= crime._id%>/comments/new">Add a new tip</a></li>
+        
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+      </div>
+        <div class="span2 article-tree left">
+     
+        </div>
+        <div style="text-align:center" class="span10 content-area">
+           <h3><%= crime.name%></h3>
 <img style="width:150px;" src = "<%= crime.image%>">
 
 <h3>Votes: <%= crime.vote%></h3>
@@ -51,13 +62,13 @@ ul {
       </p>
     <% })%>
   </p>
-   <p>
-      <a class='btn btn-default' href="/crimes/<%= crime._id%>/comments/new">Add a new tip</a>
-  </p>
-  <p>
-
-
-<a class='btn btn-default' href="/crimes">See all crimes</a>
-<a class='btn btn-default' href="/">Back to map</a>
-</div>
-</div>
+            <div class="offset8 span2 article-tree right">    
+               
+           </div>
+        </div>        
+      <div class="footer">
+        
+      </div>
+    </div>
+  </body>
+</html>
