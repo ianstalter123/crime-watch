@@ -57,7 +57,6 @@ var markers = []
   $.ajax({
       type: 'GET',
       url: 'https://data.sfgov.org/resource/ritf-b9ki.json',
-      //?$limit=10000
       dataType: 'json'
     }).done(function(data) {
 
@@ -117,7 +116,7 @@ crimeImage = '/images/crime.png'
 
   })
   console.log(markers)
-  var mcOptions = {minimumClusterSize: 2,  maxZoom: 15};
+  var mcOptions = {minimumClusterSize: 2};
 
     var mc = new MarkerClusterer(map, markers, mcOptions);
 })
