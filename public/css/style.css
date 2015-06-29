@@ -1,2 +1,8 @@
-ul{height:125px;}
-ul{overflow:hidden; overflow-y:scroll;}
+/*ul{height:125px;}
+ul{overflow:hidden; overflow-y:scroll;}*/
+
+.navbar
+{
+	margin-bottom:0px;
+}
+

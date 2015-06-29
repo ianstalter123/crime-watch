@@ -276,7 +276,7 @@ function loadCrimes()
 	console.log("sorted the array")
   //console.log(arr)
 	//output the items on the ui
-  $('.panel-body').append("<table style = 'text-align:center'>")
+  $('.offset8').append("<table style = 'text-align:center'>")
 	for(var i = 0; i < 10; i++)
 	{
     console.log("starting for loop")
@@ -299,11 +299,11 @@ function loadCrimes()
  //   $('ul').append("<li class='list-group-item list-group-item-success'>Long: " + arr[i][1].location.longitude + "</li>")
  //   $('ul').append("<li class='list-group-item list-group-item-success'>Lat: " + arr[i][1].location.latitude + "</li>")
  //   $('ul').append("<li class='list-group-item list-group-item-success'>Res: " + arr[i][1].resolution + "</li>")
- $('.panel-body').append("<tr><td><img src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBfkk7LEfxwS6_DnBvQ_iP_dXE9PR5pHFuvnsVny2DJtZu3AImmwm9qeY' style='width:50px;'></td><td><a>" + arr[i][1].descript + "</a></td><td><a href='/crimes/new?q="+arr[i][1].descript+"'>Add</a></td></tr>")
+ $('.offset8').append("<tr><td><img src = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBfkk7LEfxwS6_DnBvQ_iP_dXE9PR5pHFuvnsVny2DJtZu3AImmwm9qeY' style='width:50px;'></td><td><a>" + arr[i][1].descript + "</a></td><td><a href='/crimes/new?q="+arr[i][1].descript+"'>Add</a></td></tr>")
       }
       console.log(arr[i][1].location.longitude)
       console.log(arr[i][1].location.latitude)
-      $('.panel-body').append("</table>")
+      $('.offset8').append("</table>")
     })
   }
 
