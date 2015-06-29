@@ -240,6 +240,6 @@ app.get('*', function(req,res){
 });
 
 
-app.listen(9090, function(){
+app.listen(process.env.PORT || 3000)
   console.log("Welcome to the machine");
 });
