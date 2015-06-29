@@ -21,10 +21,10 @@ $('#pan').on('click', function(e){
 //todo store the latitude and long in each item and save in hidden form
 //so that i can zoom to it on the map
 
-function pan() {
+function pan(a,b) {
   console.log('panning')
-        var panPoint = new google.maps.LatLng(37.7868979973476,-122.388784430412);
-        map.setZoom(20);
+        var panPoint = new google.maps.LatLng(a,b);
+        map.setZoom(15);
         map.panTo(panPoint)
      }
 
@@ -197,10 +197,36 @@ function showPosition(position) {
     lat = position.coords.latitude;
     
     lng = position.coords.longitude;
+    
+    
+   
 
-//todo add a url in the me marker to show my image/url
-    addMarker(lat,lng,"me",image)
-}
+
+
+//creates an infowindow for the app (tooltip popup box)
+      var infowindow = new google.maps.InfoWindow({
+      content: 'My location'
+  });
+
+//creates a point for the map
+    var myLatlng = new google.maps.LatLng(lat,lng);
+
+//creates a marker at the point
+    var marker = new google.maps.Marker({
+      position: myLatlng,
+      map: map,
+      title: 'My location',
+      
+    });
+    infowindow.open(map,marker);
+
+     google.maps.event.addListener(marker, 'click', function() {
+      infowindow.open(marker.get('map'), marker);
+    });
+    //adds the info window without opening it
+ pan(lat, lng)
+    }
+
 
 
 //stackoverflow found function for getting distance 
