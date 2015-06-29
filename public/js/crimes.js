@@ -222,6 +222,7 @@ function showPosition(position) {
 
      google.maps.event.addListener(marker, 'click', function() {
       infowindow.open(marker.get('map'), marker);
+      pan(lat, lng)
     });
     //adds the info window without opening it
  pan(lat, lng)
