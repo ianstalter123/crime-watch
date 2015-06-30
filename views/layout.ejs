@@ -47,7 +47,7 @@
      
       <ul class="nav navbar-nav navbar-right">
         <li><a title="View or add nearby incidents" id ="data" href="#">Show crimes nearby</a></li>
-        <li><a title="Search and add by category" id ="search" href="/search">Search by category</a></li>
+        <li><a title="Search and view charts" id ="search" href="/search">Search by category</a></li>
         
       </ul>
     </div><!-- /.navbar-collapse -->
@@ -64,7 +64,7 @@
 
 
 <table style = "margin-top: 15px">
-<h4 > Collection </h4>
+<h4 > Watching </h4>
 <% crimes.forEach(function(crime){ %>
   <tr style = "text-align:left">
     <td><img style="width:50px;padding:3px" src = "<%= crime.image%>"></td>

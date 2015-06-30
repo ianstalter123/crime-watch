@@ -152,9 +152,11 @@ $('ul').append("<form id = 'test' class = 'search-form'><input type = 'hidden' i
       fontColor: "#6b6b6b"
     },
     theme: "theme1",
+     exportEnabled: true,
+      panEnabled: true,
     data: [
       {
-        type: "pie",
+        type: "doughnut",
         indexLabelFontFamily: "Garamond",
         indexLabelFontSize: 12,
         indexLabel: "{label} number: {y}",
