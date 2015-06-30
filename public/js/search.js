@@ -1,5 +1,8 @@
 $(function() {
 
+
+
+
 $("#searchinput").tooltip({placement: 'bottom'});
 //verifies that we've reached the search page
 	console.log('search page active')
@@ -86,15 +89,26 @@ $('#searchinput').keypress(function (e) {
 	$.ajax({
       type: 'GET',
       //updated URL for the JSON call
-      url: 'https://data.sfgov.org/resource/ritf-b9ki.json?$limit=15&category=' + query,
+      url: 'https://data.sfgov.org/resource/ritf-b9ki.json?$limit=30&category=' + query,
       dataType: 'json'
     }).done(function(data) {
+      var frequency = {}, value;
       //loop through the data and append all the data to the DOM
       // thought - maybe append them on a map after the search results are found?
-
+      // another thought - maybe make a chart / visual display of the different types 
     	data.forEach(function(item){
 
    
+
+    // compute frequencies of each value
+
+        value = item.descript;
+        if(value in frequency) {
+            frequency[value]++;
+        }
+        else {
+            frequency[value] = 1;
+        }
    //maybe replace this with handlebars someday
     $('ul').append("<li >Crime: " + item.descript + "</li>")
    $('ul').append("<li >Time: " + item.time + "</li>")
@@ -108,6 +122,53 @@ $('ul').append("<form id = 'test' class = 'search-form'><input type = 'hidden' i
 
 
      })
+
+
+     var crimeStats = [];
+  //  console.log(typeof frequency)
+    for (x in frequency) { 
+      var temp = {};
+      temp.y = frequency[x];
+      temp.label = x;
+      temp.legendText = x;
+      crimeStats.push(temp);
+    }
+  
+    
+
+      var chart = new CanvasJS.Chart("chartContainer",
+  {
+    backgroundColor: "#EFECEC",
+    title:{
+      fontColor: "#6b6b6b",
+      text: "Crime Stats"
+    },
+                animationEnabled: true,
+    legend:{
+      verticalAlign: "center",
+      horizontalAlign: "left",
+      fontSize: 12,
+      fontFamily: "Helvetica",
+      fontColor: "#6b6b6b"
+    },
+    theme: "theme1",
+    data: [
+      {
+        type: "pie",
+        indexLabelFontFamily: "Garamond",
+        indexLabelFontSize: 12,
+        indexLabel: "{label} number: {y}",
+        startAngle:-20,
+        showInLegend: false,
+        toolTipContent:"{legendText} {y}",
+        dataPoints: crimeStats
+      }
+    ]
+  });
+
+  chart.render();
+
+
 	})
 }
 
