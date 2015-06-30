@@ -88,10 +88,14 @@ app.post("/login", function (req, res) {
 });
 
 app.get('/crimes', function(req,res){
+  db.User.find(req.session.id, "email", function(err, user) {
+ 
+ 
   db.Crime.find({}, function(err,crimes){
+
      res.format({
        'text/html': function(){
-         res.render("crimes/index", {crimes: crimes});
+         res.render("crimes/index", {crimes: crimes, user:user});
        },
 
        'application/json': function(){
@@ -102,6 +106,7 @@ app.get('/crimes', function(req,res){
          res.status(406).send('Not Acceptable');
        }
      })
+      });
   });
 });
 
