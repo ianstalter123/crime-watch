@@ -86,7 +86,7 @@ $('#searchinput').keypress(function (e) {
 	$.ajax({
       type: 'GET',
       //updated URL for the JSON call
-      url: 'https://data.sfgov.org/resource/ritf-b9ki.json?category=' + query,
+      url: 'https://data.sfgov.org/resource/ritf-b9ki.json?$limit=15&category=' + query,
       dataType: 'json'
     }).done(function(data) {
       //loop through the data and append all the data to the DOM
