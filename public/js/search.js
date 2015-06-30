@@ -89,6 +89,7 @@ $('#searchinput').keypress(function (e) {
       dataType: 'json'
     }).done(function(data) {
       //loop through the data and append all the data to the DOM
+      // thought - maybe append them on a map after the search results are found?
 
     	data.forEach(function(item){
 

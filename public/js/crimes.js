@@ -1,6 +1,10 @@
 $(function() {
 
 
+$(".navbar-brand").tooltip({placement: 'right'});
+$("#data").tooltip({placement: 'right'});
+$("#search").tooltip({placement: 'right'});
+
   getLocation();
 
 var image = 'images/me.png';
