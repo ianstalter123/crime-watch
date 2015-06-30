@@ -270,6 +270,7 @@ function loadCrimes()
 
   //push each item into an array for easy sorting
   console.log("pushing data")
+  pan(lat,lng)
 	data.forEach(function(item) {
   arr.push([getDistance(item.location.latitude,item.location.longitude,lat,lng), item])
 	})

@@ -1,6 +1,6 @@
 $(function() {
 
-
+$("#searchinput").tooltip({placement: 'bottom'});
 //verifies that we've reached the search page
 	console.log('search page active')
 //value for the input box
@@ -48,6 +48,7 @@ $.ajax({
     select: function(event, ui) { 
     	$('#search').click();
    		 $( "#searchinput" ).blur();
+
        
     },
 		});
