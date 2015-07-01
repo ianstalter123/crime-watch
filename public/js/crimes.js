@@ -220,6 +220,7 @@ function showPosition(position) {
       position: myLatlng,
       map: map,
       title: 'My location',
+      animation: google.maps.Animation.DROP
       
     });
     infowindow.open(map,marker);
