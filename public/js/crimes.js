@@ -1,5 +1,6 @@
 $(function() {
 
+var mc;
 
 $(".navbar-brand").tooltip({placement: 'right'});
 $("#data").tooltip({placement: 'right'});
@@ -17,11 +18,46 @@ $('#data').on('click', function(e){
   loadCrimes();
 })
 
+$('#cat').on('click', function(e){
+  loadAllCrimes("FRAUD");
+})
+$('#arson').on('click', function(e){
+  loadAllCrimes("ARSON");
+})
+$('#assault').on('click', function(e){
+  loadAllCrimes("ASSAULT");
+})
+$('#theft').on('click', function(e){
+  loadAllCrimes("LARCENY/THEFT");
+})
+$('#robbery').on('click', function(e){
+  loadAllCrimes("ROBBERY");
+})
+
 $('#pan').on('click', function(e){
   pan()
 })
 
+$('#clear').on('click', function(e){
+  //Clears all clusters and markers from the clusterer.
+    setAllMap(null);
+  mc.clearMarkers();
+    // Unset all markers
+        var i = 0,
+            l = markers.length;
+        for (i; i < l; i++) {
+            markers[i].setMap(null)
+        }
+        markers = [];
 
+        
+})
+
+function setAllMap(map) {
+  for (var i = 0; i < markers.length; i++) {
+    markers[i].setMap(map);
+  }
+}
 //todo store the latitude and long in each item and save in hidden form
 //so that i can zoom to it on the map
 
@@ -32,9 +68,6 @@ function pan(a,b) {
         map.panTo(panPoint)
      }
 
-$('#all').on('click', function(e){
-  loadAllCrimes()
-})
 
 //todo: add a view all crimes button to view all crimes
 //without posting them to the DB
@@ -48,6 +81,17 @@ var markers = []
 	console.log('welcome to the crime map')
 
 //start the app by loading the map 
+
+//new goal -> to have a dropdown where I can select a 
+//category on the map, and the map will remove and reload
+//all markers based on the dropdown category.
+
+//steps 1) have a menu
+//steps 2) dropdown in menu
+//steps 3) select the category
+//steps 4) clear the map of everything and clear markerclusterer
+//steps 5) pin all markers from that category on the map
+
 	 function initialize() {
     var mapCanvas = document.getElementById('map-canvas');
     var mapOptions = {
@@ -71,9 +115,12 @@ var markers = []
 
 
 
+
   var latLng = new google.maps.LatLng(item.location.latitude,
       item.location.longitude);
+
       if(item.category == "ARSON")
+
 {
 crimeImage = '/images/arson.png'
 }
@@ -122,8 +169,9 @@ crimeImage = '/images/crime.png'
   })
   console.log(markers)
   var mcOptions = {minimumClusterSize: 2,  maxZoom: 15};
+mc = new MarkerClusterer(map, markers, mcOptions);
 
-    var mc = new MarkerClusterer(map, markers, mcOptions);
+    
 })
 
 
@@ -230,7 +278,7 @@ function showPosition(position) {
       pan(lat, lng)
     });
     //adds the info window without opening it
- pan(lat, lng)
+ //pan(lat, lng)
     }
 
 
@@ -263,6 +311,9 @@ var getDistance = function(lat1,long1,lat2,long2) {
 function loadCrimes()
 {
   console.log("load crimes")
+
+    
+
   $.ajax({
       type: 'GET',
       url: 'https://data.sfgov.org/resource/ritf-b9ki.json',
@@ -271,6 +322,7 @@ function loadCrimes()
 
   //push each item into an array for easy sorting
   console.log("pushing data")
+  
   pan(lat,lng)
 	data.forEach(function(item) {
   arr.push([getDistance(item.location.latitude,item.location.longitude,lat,lng), item])
@@ -314,7 +366,7 @@ function loadCrimes()
     })
   }
 
-  function loadAllCrimes() {
+  function loadAllCrimes(cat) {
     console.log("load all crimes")
       $.ajax({
       type: 'GET',
@@ -326,6 +378,8 @@ function loadCrimes()
 //loops through the data and determines an
   data.forEach(function(item) {
     console.log(item.category)
+
+  if(item.category == cat) {
     if(item.category == "ARSON")
 {
 crimeImage = 'images/arson.png'
@@ -358,9 +412,20 @@ else
 {
 crimeImage = 'images/crime.png'
 }
-  addMarker(Number(item.location.latitude),Number(item.location.longitude),item.descript + " " + "resolution: " + item.resolution + " " + item.date,crimeImage)
 
+ var latLng = new google.maps.LatLng(item.location.latitude,
+      item.location.longitude);
+
+ var marker = new google.maps.Marker({'position': latLng, icon: crimeImage});
+
+  
+
+    addInfoWindow(marker,"<table><tr><td><img src ='" + crimeImage + "'  style='width:50px;'></td><td><a id ='pan'>" + item.descript + "</a></td></tr><tr><td></td><td><a>Date:  "+item.date+"</a></td></tr><tr><td></td><td><a>Resolution:  "+item.resolution+"</a></td></tr><tr><td></td><td><a class='btn btn-default' href='/crimes/new?q="+item.descript+"&i="+crimeImage+"'>Add to my collection</a></td></tr></tr></table>");
+  markers.push(marker);
+}
   })
+  var mcOptions = {minimumClusterSize: 2,  maxZoom: 15};
+mc = new MarkerClusterer(map, markers, mcOptions);
   })
 }
 //runs the main function 
