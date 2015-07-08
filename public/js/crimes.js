@@ -2,6 +2,18 @@ $(function() {
 
 var mc;
 
+var clearAll = function() {
+   setAllMap(null);
+  mc.clearMarkers();
+    // Unset all markers
+        var i = 0,
+            l = markers.length;
+        for (i; i < l; i++) {
+            markers[i].setMap(null)
+        }
+        markers = [];
+}
+
 $(".navbar-brand").tooltip({placement: 'right'});
 $("#data").tooltip({placement: 'right'});
 $("#search").tooltip({placement: 'right'});
@@ -19,18 +31,23 @@ $('#data').on('click', function(e){
 })
 
 $('#cat').on('click', function(e){
+  clearAll()
   loadAllCrimes("FRAUD");
 })
-$('#arson').on('click', function(e){
-  loadAllCrimes("ARSON");
+$('#vandalism').on('click', function(e){
+  clearAll()
+  loadAllCrimes("VANDALISM");
 })
 $('#assault').on('click', function(e){
+  clearAll()
   loadAllCrimes("ASSAULT");
 })
 $('#theft').on('click', function(e){
+  clearAll()
   loadAllCrimes("LARCENY/THEFT");
 })
 $('#robbery').on('click', function(e){
+  clearAll()
   loadAllCrimes("ROBBERY");
 })
 
