@@ -1,18 +1,8 @@
-$(function() {
+$(function () {
 
-var mc;
+  var mc;
 
-var clearAll = function() {
-   setAllMap(null);
-  mc.clearMarkers();
-    // Unset all markers
-        var i = 0,
-            l = markers.length;
-        for (i; i < l; i++) {
-            markers[i].setMap(null)
-        }
-        markers = [];
-}
+ 
 
 $(".navbar-brand").tooltip({placement: 'right'});
 $("#data").tooltip({placement: 'right'});
@@ -298,7 +288,17 @@ function showPosition(position) {
  //pan(lat, lng)
     }
 
-
+ var clearAll = function () {
+    setAllMap(null);
+    mc.clearMarkers();
+    // Unset all markers
+    var i = 0,
+      l = markers.length;
+    for (i; i < l; i++) {
+      markers[i].setMap(null);
+    }
+    markers = [];
+  }
 
 //stackoverflow found function for getting distance 
 //between two points from longitude/ latitude
