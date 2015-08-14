@@ -27,7 +27,7 @@ app.use(session({
 
 app.use(loginMiddleware);
 
-app.get('/',routeMiddleware.ensureLoggedIn, function(req,res){
+app.get('/', function(req,res){
   db.Crime.find({}, function(err,crimes){
      res.format({
        'text/html': function(){
@@ -45,7 +45,7 @@ app.get('/',routeMiddleware.ensureLoggedIn, function(req,res){
   });
 });
 
-app.get('/search', routeMiddleware.ensureLoggedIn, function(req,res){
+app.get('/search', function(req,res){
   res.render('search');
 });
 
