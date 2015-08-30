@@ -3,3 +3,4 @@ This was my first week long project at gschool ,  I basically used express.js, a
 
 In addition I have a search functionality which displays charts showing the quantity of each type of crimes, using canvas.js. 
 
+[link to the app](http://crime-map.herokuapp.com/)
